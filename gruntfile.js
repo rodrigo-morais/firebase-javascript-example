@@ -1,18 +1,16 @@
 ﻿module.exports = function (grunt) {
 
     grunt.initConfig({
-        '6to5': {
+        babel: {
             options: {
+                sourceMap: true,
                 modules: 'amd'
             },
-
-            build: {
-                files: [{
-                    expand: true,
-                    cwd: 'javascript/',
-                    src: ['app.js', 'config.js'],
-                    dest: 'dist/javascript',
-                }],
+            dist: {
+                files: {
+                    'dist/javascript/app.js': 'javascript/app.js',
+                    'dist/javascript/config.js': 'javascript/config.js'
+                }
             }
         },
         copy: {
@@ -27,9 +25,9 @@
         }
     });
 
-    grunt.loadNpmTasks('grunt-6to5');
+    grunt.loadNpmTasks('grunt-babel');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['6to5', 'copy']);
+    grunt.registerTask('default', ['babel', 'copy']);
 
 };
